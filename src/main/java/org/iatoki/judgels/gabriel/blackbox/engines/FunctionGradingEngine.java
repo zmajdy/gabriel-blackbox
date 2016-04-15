@@ -15,8 +15,8 @@ import org.iatoki.judgels.gabriel.blackbox.TestGroup;
 import org.iatoki.judgels.gabriel.blackbox.algorithms.BatchEvaluator;
 import org.iatoki.judgels.gabriel.blackbox.algorithms.CustomScorer;
 import org.iatoki.judgels.gabriel.blackbox.algorithms.DiffScorer;
+import org.iatoki.judgels.gabriel.blackbox.algorithms.MultiSourceFileCompiler;
 import org.iatoki.judgels.gabriel.blackbox.algorithms.SimpleReducer;
-import org.iatoki.judgels.gabriel.blackbox.algorithms.SingleSourceFileCompiler;
 import org.iatoki.judgels.gabriel.blackbox.configs.FunctionGradingConfig;
 import org.iatoki.judgels.gabriel.blackbox.languages.Cpp11GradingLanguage;
 import org.iatoki.judgels.gabriel.sandboxes.Sandbox;
@@ -64,7 +64,7 @@ public final class FunctionGradingEngine extends BlackBoxGradingEngine {
         File mainSourceFile = helperFiles.get(castConfig.getMainSourceFile());
 
         compilerSandbox = sandboxFactory.newSandbox();
-        compiler = new SingleSourceFileCompiler(compilerSandbox, getCompilationDir(), language, sourceFieldKey, mainSourceFile, getCompilationTimeLimitInMilliseconds(), getCompilationMemoryLimitInKilobytes());
+        compiler = new MultiSourceFileCompiler(compilerSandbox, getCompilationDir(), language, castConfig.getMainSourceFile(), ImmutableList.of(contestantSourceFile, mainSourceFile), getCompilationTimeLimitInMilliseconds(), getCompilationMemoryLimitInKilobytes());
 
         evaluatorSandbox = sandboxFactory.newSandbox();
 
