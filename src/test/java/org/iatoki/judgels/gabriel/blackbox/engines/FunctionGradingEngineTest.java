@@ -54,7 +54,6 @@ public final class FunctionGradingEngineTest extends BlackBoxGradingEngineTest {
     @Test
     public void testAC() {
         addSourceFile("source", "aplusb-AC-lib.cpp");
-        addSourceFile("helper", "aplusb-AC.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC.cpp", null));
@@ -73,7 +72,6 @@ public final class FunctionGradingEngineTest extends BlackBoxGradingEngineTest {
     @Test
     public void testACButWAAtSampleThatIsNotIncluded() {
         addSourceFile("source", "aplusb-WA-at-sample_3-lib.cpp");
-        addSourceFile("helper", "aplusb-WA-at-sample_3.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-sample_3.cpp", null));
@@ -92,7 +90,6 @@ public final class FunctionGradingEngineTest extends BlackBoxGradingEngineTest {
     @Test
     public void testWA80() {
         addSourceFile("source", "aplusb-WA-at-1_1-lib.cpp");
-        addSourceFile("helper", "aplusb-WA-at-1_1.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-1_1.cpp", null));
@@ -111,7 +108,6 @@ public final class FunctionGradingEngineTest extends BlackBoxGradingEngineTest {
     @Test
     public void testOK90WithCustomScorer() {
         addSourceFile("source", "aplusb-WA-at-1_1-lib.cpp");
-        addSourceFile("helper", "aplusb-WA-at-1_1.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-1_1.cpp", "scorer-nonbinary-OK10-at-1_1.cpp"));

@@ -63,7 +63,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testCE() {
         addSourceFile("source", "aplusb-CE-lib.cpp");
-        addSourceFile("helper", "aplusb-CE.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-CE.cpp", null));
@@ -80,7 +79,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testAC() {
         addSourceFile("source", "aplusb-AC-lib.cpp");
-        addSourceFile("helper", "aplusb-AC.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC.cpp", null));
@@ -99,8 +97,7 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
 
     @Test
     public void testOK30() {
-        addSourceFile("helper", "aplusb-WA-at-2_3-lib.cpp");
-        addSourceFile("source", "aplusb-WA-at-2_3.cpp");
+        addSourceFile("source", "aplusb-WA-at-2_3-lib.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-2_3.cpp", null));
@@ -120,7 +117,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testOK30BecauseTLE() {
         addSourceFile("source", "aplusb-TLE-at-2_3-lib.cpp");
-        addSourceFile("helper", "aplusb-TLE-at-2_3.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-TLE-at-2_3.cpp", null));
@@ -140,7 +136,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testOK30BecauseWAAtSample() {
         addSourceFile("source", "aplusb-WA-at-sample_3-lib.cpp");
-        addSourceFile("helper", "aplusb-WA-at-sample_3.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-sample_3.cpp", null));
@@ -161,7 +156,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testOK0() {
         addSourceFile("source", "aplusb-WA-at-1_1-lib.cpp");
-        addSourceFile("helper", "aplusb-WA-at-1_1.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-1_1.cpp", null));
@@ -181,7 +175,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testACWithCustomScorer() {
         addSourceFile("helper", "aplusb-AC-scorer-lib.cpp");
-        addSourceFile("source", "aplusb-AC-scorer.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC-scorer.cpp", "scorer-binary.cpp"));
@@ -201,7 +194,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testOK30WithCustomScorer() {
         addSourceFile("source", "aplusb-WA-at-2_3-scorer-lib.cpp");
-        addSourceFile("helper", "aplusb-WA-at-2_3-scorer.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-WA-at-2_3-scorer.cpp", "scorer-binary.cpp"));
@@ -221,7 +213,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testInternalErrorBecauseCustomScorerCE() {
         addSourceFile("source", "aplusb-AC-scorer-lib.cpp");
-        addSourceFile("helper", "aplusb-AC-scorer.cpp");
 
         try {
             runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC-scorer.cpp", "scorer-CE.cpp"));
@@ -235,7 +226,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testInternalErrorBecauseCustomScorerRTE() {
         addSourceFile("source", "aplusb-AC-scorer-lib.cpp");
-        addSourceFile("helper", "aplusb-AC-scorer.cpp");
 
         try {
             runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC-scorer.cpp", "scorer-RTE.cpp"));
@@ -248,7 +238,6 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
     @Test
     public void testInternalErrorBecauseCustomScorerOutputUnknownFormat() {
         addSourceFile("source", "aplusb-AC-scorer-lib.cpp");
-        addSourceFile("helper", "aplusb-AC-scorer.cpp");
 
         try {
             runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC-scorer.cpp", "scorer-WA.cpp"));
