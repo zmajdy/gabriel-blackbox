@@ -70,7 +70,7 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
             assertEquals(result.getScore(), 0);
 
             BlackBoxGradingResultDetails details = new Gson().fromJson(result.getDetails(), BlackBoxGradingResultDetails.class);
-            assertTrue(details.getCompilationOutputs().get("source").contains("BB"));
+            assertTrue(details.getCompilationOutputs().get("aplusb-CE.cpp").contains("BB"));
         } catch (GradingException e) {
             fail();
         }
@@ -174,7 +174,7 @@ public final class FunctionWithSubtasksGradingEngineTest extends BlackBoxGrading
 
     @Test
     public void testACWithCustomScorer() {
-        addSourceFile("helper", "aplusb-AC-scorer-lib.cpp");
+        addSourceFile("source", "aplusb-AC-scorer-lib.cpp");
 
         try {
             GradingResult result = runEngine(engine, createConfigWithMainSourceFileAndCustomScorer("aplusb-AC-scorer.cpp", "scorer-binary.cpp"));

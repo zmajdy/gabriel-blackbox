@@ -11,4 +11,6 @@ int mainCall()
         return 10;
 
     printf("%d\n", answer);
+
+    return 0;
 }
