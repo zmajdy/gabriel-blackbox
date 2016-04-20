@@ -1,6 +1,7 @@
 package org.iatoki.judgels.gabriel.blackbox;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
@@ -120,7 +121,7 @@ public abstract class BlackBoxGradingEngine implements GradingEngine {
         prepare();
         compile();
 
-        if (compilationResult.getVerdict() == CompilationVerdict.COMPILATION_ERROR) {
+        if ((getCompiler() != null) && (compilationResult.getVerdict() == CompilationVerdict.COMPILATION_ERROR)) {
             return BlackBoxGradingResults.compilationErrorResult(compilationResult.getOutputs());
         }
 
@@ -165,7 +166,11 @@ public abstract class BlackBoxGradingEngine implements GradingEngine {
     private void compile() throws CompilationException {
         MDC.put("gradingPhase", "COMPILE");
         GabrielLogger.getLogger().info("Compilation started.");
-        compilationResult = getCompiler().compile();
+        if (getCompiler() != null) {
+            compilationResult = getCompiler().compile();
+        } else {
+            GabrielLogger.getLogger().info("No compiler is used.");
+        }
         GabrielLogger.getLogger().info("Compilation finished.");
     }
 
@@ -209,7 +214,7 @@ public abstract class BlackBoxGradingEngine implements GradingEngine {
 
                 TestCaseResult testCaseResult;
                 if (evaluationResult.getVerdict() == EvaluationVerdict.OK) {
-                    ScoringResult scoringResult = getScorer().score(testCaseInput, testCaseOutput);
+                    ScoringResult scoringResult = getScorer().score(testCaseInput, testCaseOutput, new File(getEvaluationDir(), getEvaluator().getEvaluationResultFilename(testCaseInput)));
                     testCaseResult = TestCaseResult.fromScoringResult(scoringResult);
                 } else {
                     testCaseResult = TestCaseResult.fromEvaluationResult(evaluationResult);
@@ -276,7 +281,14 @@ public abstract class BlackBoxGradingEngine implements GradingEngine {
             testGroupFinalResults.add(new TestGroupFinalResult(testGroup.getId(), testCaseFinalResults.build()));
         }
 
-        BlackBoxGradingResultDetails details = BlackBoxGradingResultDetails.normalDetails(compilationResult.getOutputs(), testGroupFinalResults.build(), subtaskFinalResults.build());
+        Map<String, String> compilationOutput;
+        if (getCompiler() != null) {
+            compilationOutput = compilationResult.getOutputs();
+        } else {
+            compilationOutput = ImmutableMap.of("source", "");
+        }
+
+        BlackBoxGradingResultDetails details = BlackBoxGradingResultDetails.normalDetails(compilationOutput, testGroupFinalResults.build(), subtaskFinalResults.build());
 
         return BlackBoxGradingResults.normalResult(reductionResult, details);
     }
