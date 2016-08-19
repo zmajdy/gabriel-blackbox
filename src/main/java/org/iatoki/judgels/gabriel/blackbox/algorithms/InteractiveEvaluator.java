@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.io.FileUtils;
+import org.iatoki.judgels.gabriel.blackbox.languages.JavaGradingLanguage;
 import org.iatoki.judgels.gabriel.GradingLanguage;
 import org.iatoki.judgels.gabriel.sandboxes.Sandbox;
 import org.iatoki.judgels.gabriel.sandboxes.SandboxExecutionResult;
@@ -59,6 +60,11 @@ public final class InteractiveEvaluator implements Evaluator {
         contestantSandbox.setTimeLimitInMilliseconds(evaluationTimeLimitInMilliseconds);
         contestantSandbox.setMemoryLimitInKilobytes(evaluationMemoryLimitInMilliseconds);
         contestantSandbox.setStackSizeInKilobytes(evaluationMemoryLimitInMilliseconds);
+
+        if (contestantLanguage instanceof JavaGradingLanguage) {
+            contestantSandbox.setMemoryLimitInKilobytes(evaluationMemoryLimitInMilliseconds + 8000);
+            contestantSandbox.setStackSizeInKilobytes(evaluationMemoryLimitInMilliseconds + 8000);
+        }
 
         communicatorSandbox.addFile(new File(evaluationDir, communicatorExecutableName));
         File communicatorExecutableFile = communicatorSandbox.getFile(communicatorExecutableName);

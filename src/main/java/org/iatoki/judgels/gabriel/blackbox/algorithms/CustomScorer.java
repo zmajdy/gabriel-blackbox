@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.io.FileUtils;
+import org.iatoki.judgels.gabriel.blackbox.languages.JavaGradingLanguage;
 import org.iatoki.judgels.gabriel.GradingLanguage;
 import org.iatoki.judgels.gabriel.blackbox.CompilationException;
 import org.iatoki.judgels.gabriel.blackbox.CompilationResult;
@@ -45,6 +46,11 @@ public final class CustomScorer extends AbstractScorer {
         }
         sandbox.setTimeLimitInMilliseconds(scoringTimeLimitInMilliseconds);
         sandbox.setMemoryLimitInKilobytes(scoringMemoryLimitInKilobytes);
+
+        if (language instanceof JavaGradingLanguage) {
+            sandbox.setMemoryLimitInKilobytes(scoringMemoryLimitInKilobytes + 8000);
+            sandbox.setStackSizeInKilobytes(scoringMemoryLimitInKilobytes + 8000);
+        }
 
         this.sandbox = sandbox;
         this.customScorerExecutionCommand = language.getExecutionCommand(scorerFile.getName());

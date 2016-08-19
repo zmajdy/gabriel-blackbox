@@ -4,6 +4,7 @@ import com.beust.jcommander.internal.Maps;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.io.FileUtils;
+import org.iatoki.judgels.gabriel.blackbox.languages.JavaGradingLanguage;
 import org.iatoki.judgels.gabriel.GradingLanguage;
 import org.iatoki.judgels.gabriel.blackbox.CompilationException;
 import org.iatoki.judgels.gabriel.blackbox.CompilationResult;
@@ -43,6 +44,11 @@ public class FunctionalCompiler implements Compiler {
         sandbox.setTimeLimitInMilliseconds(timeLimitInMilliseconds);
         sandbox.setMemoryLimitInKilobytes(memoryLimitInKilobytes);
         sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes);
+
+        if (gradingLanguage instanceof JavaGradingLanguage) {
+            sandbox.setMemoryLimitInKilobytes(memoryLimitInKilobytes + 8000);
+            sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes + 8000);
+        }
 
         sandbox.resetRedirections();
         sandbox.redirectStandardOutput(COMPILATION_OUTPUT_FILENAME);
