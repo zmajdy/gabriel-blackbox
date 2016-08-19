@@ -62,8 +62,9 @@ public final class InteractiveEvaluator implements Evaluator {
         contestantSandbox.setStackSizeInKilobytes(evaluationMemoryLimitInMilliseconds);
 
         if (contestantLanguage instanceof JavaGradingLanguage) {
-            contestantSandbox.setMemoryLimitInKilobytes(evaluationMemoryLimitInMilliseconds + 8000);
-            contestantSandbox.setStackSizeInKilobytes(evaluationMemoryLimitInMilliseconds + 8000);
+            contestantSandbox.setTimeLimitInMilliseconds(evaluationTimeLimitInMilliseconds*2);
+            contestantSandbox.setMemoryLimitInKilobytes(evaluationMemoryLimitInMilliseconds*2 + 8000);
+            contestantSandbox.setStackSizeInKilobytes(evaluationMemoryLimitInMilliseconds*2 + 8000);
         }
 
         communicatorSandbox.addFile(new File(evaluationDir, communicatorExecutableName));

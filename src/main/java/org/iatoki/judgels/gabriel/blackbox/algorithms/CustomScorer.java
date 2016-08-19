@@ -48,8 +48,9 @@ public final class CustomScorer extends AbstractScorer {
         sandbox.setMemoryLimitInKilobytes(scoringMemoryLimitInKilobytes);
 
         if (language instanceof JavaGradingLanguage) {
-            sandbox.setMemoryLimitInKilobytes(scoringMemoryLimitInKilobytes + 8000);
-            sandbox.setStackSizeInKilobytes(scoringMemoryLimitInKilobytes + 8000);
+            sandbox.setTimeLimitInMilliseconds(scoringTimeLimitInMilliseconds*2);
+            sandbox.setMemoryLimitInKilobytes(scoringMemoryLimitInKilobytes*2 + 8000);
+            sandbox.setStackSizeInKilobytes(scoringMemoryLimitInKilobytes*2 + 8000);
         }
 
         this.sandbox = sandbox;

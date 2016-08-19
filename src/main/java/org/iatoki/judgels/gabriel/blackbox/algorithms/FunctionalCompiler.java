@@ -46,8 +46,9 @@ public class FunctionalCompiler implements Compiler {
         sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes);
 
         if (gradingLanguage instanceof JavaGradingLanguage) {
-            sandbox.setMemoryLimitInKilobytes(memoryLimitInKilobytes + 8000);
-            sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes + 8000);
+            sandbox.setTimeLimitInMilliseconds(timeLimitInMilliseconds*2);
+            sandbox.setMemoryLimitInKilobytes(memoryLimitInKilobytes*2 + 8000);
+            sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes*2 + 8000);
         }
 
         sandbox.resetRedirections();

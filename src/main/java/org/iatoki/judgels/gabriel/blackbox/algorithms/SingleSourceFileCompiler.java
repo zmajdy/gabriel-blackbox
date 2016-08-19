@@ -35,8 +35,9 @@ public final class SingleSourceFileCompiler implements org.iatoki.judgels.gabrie
         sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes);
 
         if (language instanceof JavaGradingLanguage) {
-            sandbox.setMemoryLimitInKilobytes(memoryLimitInKilobytes + 8000);
-            sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes + 8000);
+            sandbox.setTimeLimitInMilliseconds(timeLimitInMilliseconds*2);
+            sandbox.setMemoryLimitInKilobytes(memoryLimitInKilobytes*2 + 8000);
+            sandbox.setStackSizeInKilobytes(memoryLimitInKilobytes*2 + 8000);
         }
 
         sandbox.resetRedirections();
